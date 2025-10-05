@@ -1,0 +1,152 @@
+.upi-container {
+  padding: 25px;
+  background: #0f1822;
+  min-height: 100vh;
+  color: #f4f4f4;
+  font-family: "Poppins", sans-serif;
+}
+
+.upi-container h2 {
+  margin-bottom: 20px;
+  color: #00bcd4;
+}
+
+.upi-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.upi-form input {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: #1a2234;
+  color: #fff;
+  font-size: 14px;
+}
+
+.upi-form input.error-input {
+  border: 2px solid red;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.upi-form button {
+  background: #00bcd4;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+.upi-form button:hover:not(:disabled) {
+  background: #0288a7;
+}
+
+.upi-form button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.upi-list {
+  background: #1a2234;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.upi-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.upi-list thead {
+  background: #222c3d;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.upi-list tbody {
+  display: block;
+  max-height: 400px;
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  box-sizing: border-box; /* ✅ Fixes full-width content */
+}
+
+.upi-list tbody::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.upi-list tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.upi-list th,
+.upi-list td {
+  padding: 12px;
+  border-bottom: 1px solid #2a354a;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.delete-btn {
+  background: #e53935;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #b71c1c;
+}
+
+.stop-btn {
+  background: yellow;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #000;
+  transition: 0.3s;
+}
+
+.stop-btn.active {
+  background: green;
+  color: #fff;
+}
+
+.stop-btn:hover {
+  opacity: 0.8;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}

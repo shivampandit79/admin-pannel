@@ -1,0 +1,67 @@
+.employee-management {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background: #1f2937;
+  color: #f4f4f4;
+}
+
+.employee-management h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.employee-table th {
+  background: #111827;
+}
+
+.employee-table tr:nth-child(even) {
+  background: #2c313a;
+}
+
+.employee-table select {
+  padding: 5px;
+  border-radius: 5px;
+  background: #374151;
+  color: #fff;
+  border: none;
+}
+
+.approve-btn {
+  background: #10b981;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.approve-btn:hover {
+  background: #059669;
+}
+
+.block-btn {
+  background: #ef4444;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.block-btn:hover {
+  background: #b91c1c;
+}
