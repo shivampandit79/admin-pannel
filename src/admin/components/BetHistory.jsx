@@ -42,7 +42,6 @@ export default function BetHistory() {
   const [bets, setBets] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Use .env BASE_URL
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
