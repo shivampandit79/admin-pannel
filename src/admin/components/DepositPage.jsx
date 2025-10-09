@@ -9,8 +9,6 @@ const DepositPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [deposits, setDeposits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [approvingId, setApprovingId] = useState(null);
-  const [copyingUpi, setCopyingUpi] = useState(false); // ✅ Track copy UPI loading
 
   useEffect(() => {
     document.title = `${APP_TITLE} - Deposits`;
@@ -54,7 +52,6 @@ const DepositPage = () => {
   };
 
   const handleStatusChange = async (depositId) => {
-    setApprovingId(depositId);
     try {
       const token =
         localStorage.getItem("adminToken") || localStorage.getItem("executiveToken");
@@ -79,29 +76,6 @@ const DepositPage = () => {
       }
     } catch (err) {
       console.error("Error:", err);
-    } finally {
-      setApprovingId(null);
-    }
-  };
-
-  // ✅ NEW: Copy random UPI function
-  const handleCopyRandomUpi = async () => {
-    setCopyingUpi(true);
-    try {
-      const res = await fetch(`${BASE_URL}/upi/random`);
-      const data = await res.json();
-
-      if (data.success && data.upi && data.upi.upi) {
-        await navigator.clipboard.writeText(data.upi.upi);
-        alert(`📋 UPI ID "${data.upi.upi}" copied to clipboard!`);
-      } else {
-        alert("No UPI ID found.");
-      }
-    } catch (err) {
-      console.error("Error copying UPI:", err);
-      alert("Error fetching UPI.");
-    } finally {
-      setCopyingUpi(false);
     }
   };
 
@@ -115,30 +89,13 @@ const DepositPage = () => {
     filteredDeposits = filteredDeposits.filter(
       (d) =>
         d.transectionID.toLowerCase().includes(lower) ||
-        (d.mobile && d.mobile.toLowerCase().includes(lower))
+        d.mobile.includes(lower)
     );
   }
 
   return (
     <div className="deposit-page-container">
       <h2>User Deposits Management</h2>
-
-      <div style={{ marginBottom: "20px" }}>
-        <button
-          onClick={handleCopyRandomUpi}
-          disabled={copyingUpi}
-          style={{
-            padding: "8px 15px",
-            borderRadius: "8px",
-            border: "none",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            cursor: "pointer",
-          }}
-        >
-          {copyingUpi ? "Copying UPI..." : "Copy Random UPI"}
-        </button>
-      </div>
 
       <div className="filter-section" style={{ flexWrap: "wrap", gap: "15px" }}>
         <label>Status Filter: </label>
@@ -212,9 +169,8 @@ const DepositPage = () => {
                         <button
                           className="status-change-btn"
                           onClick={() => handleStatusChange(deposit.id)}
-                          disabled={approvingId === deposit.id}
                         >
-                          {approvingId === deposit.id ? "Approving..." : "Approve"}
+                          Approve
                         </button>
                       )}
                     </td>
@@ -222,7 +178,10 @@ const DepositPage = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" style={{ textAlign: "center", padding: "20px" }}>
+                  <td
+                    colSpan="8"
+                    style={{ textAlign: "center", padding: "20px" }}
+                  >
                     No deposits found.
                   </td>
                 </tr>
