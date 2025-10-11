@@ -50,12 +50,21 @@ const Dashboard = ({ setIsAuthenticated }) => {
       setLoading(true);
       const token = localStorage.getItem("adminToken") || localStorage.getItem("executiveToken");
 
+      // 🔹 Fetch all users
       const resUsers = await fetch(`${BASE_URL}/admin/allusers`, { headers: { "auth-token": token } });
       const usersData = await resUsers.json();
 
+      // 🔹 Fetch all deposits
       const resDeposits = await fetch(`${BASE_URL}/admin/deposithistory`, { headers: { "auth-token": token } });
       const depositsData = await resDeposits.json();
 
+      // ✅ Only sum deposits with status "Approved"
+      const totalApprovedDeposits = depositsData.deposits?.reduce(
+        (acc, deposit) => deposit.status === "Approved" ? acc + (deposit.amount || 0) : acc,
+        0
+      ) || 0;
+
+      // 🔹 Fetch all spins
       const resSpins = await fetch(`${BASE_URL}/admin/spinhistory`, { headers: { "auth-token": token } });
       const spinsData = await resSpins.json();
 
@@ -63,7 +72,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
       const newStats = {
         totalUsers: usersData.users?.length || 0,
-        totalDeposits: depositsData.deposits?.reduce((a, b) => a + (b.amount || 0), 0) || 0,
+        totalDeposits: totalApprovedDeposits, // ✅ updated
         totalSpins: sortedBets.length,
         totalWinnings: sortedBets.reduce((a, b) => a + (b.winAmount || 0), 0) || 0,
       };
